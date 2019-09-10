@@ -1,3 +1,4 @@
+import config
 import os
 import spotipy
 import spotipy.util as util
@@ -9,7 +10,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 # pull our Spotify API credentials from environment
 cid = os.getenv("SPOTTY_CID")
 secret = os.getenv("SPOTTY_SECRET")
-if not cid or not secret:
+if not config.CID or not config.SECRET:
     raise SystemExit("no credentials found")
 
 # set up our Spotify API client handle
@@ -47,4 +48,4 @@ def get_suggestions(artist):
     return jsonify({'tracks': tracks})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8080)
+    app.run(host="0.0.0.0", port=config.PORT, debug=config.DEBUG_MODE)
